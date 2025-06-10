@@ -1,0 +1,101 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:id="@+id/signup"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="32dp">
+
+        <!-- Логотип -->
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/circle_border"
+            android:gravity="center"
+            android:lineSpacingExtra="2dp"
+            android:text="Будущий\nлоготип"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <!-- Заголовок -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="@string/title_signup"
+            android:textColor="#93002F"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- Поле Имя -->
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edittext_border"
+            android:hint="Имя"
+            android:paddingHorizontal="16dp"
+            android:textColor="#000000"
+            android:textColorHint="#F16C97" />
+
+        <!-- Поле Логин -->
+        <EditText
+            android:id="@+id/etLogin"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edittext_border"
+            android:hint="Номер телефона"
+            android:paddingHorizontal="16dp"
+            android:textColor="#000000"
+            android:textColorHint="#F16C97"
+            android:inputType="phone"/>
+
+        <!-- Поле Пароль -->
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/edittext_border"
+            android:hint="Пароль"
+            android:inputType="textPassword"
+            android:paddingHorizontal="16dp"
+            android:textColor="#000000"
+            android:textColorHint="#F16C97" />
+
+        <!-- Кнопка Войти -->
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/button_rounded"
+            android:text="@string/btn_signup"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="@color/vinous" />
+
+        <!-- Ссылка Регистрация -->
+        <TextView
+            android:id="@+id/tvRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/btn_link_login"
+            android:textColor="#93002F"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</ScrollView>

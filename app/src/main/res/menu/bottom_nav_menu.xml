@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#00FFFFFF">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/home"
+        android:onClick="setNewActivity" />
+    <item
+        android:id="@+id/cart"
+        android:icon="@drawable/cart"
+        android:onClick="setNewActivity" />
+    <item
+        android:id="@+id/more"
+        android:icon="@drawable/strip"
+        android:onClick="setNewActivity" />
+</menu>

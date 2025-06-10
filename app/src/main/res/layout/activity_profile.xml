@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/bottomNavigationProfile"
+            android:background="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/tv_profile_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="25dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="Профиль"
+                    android:textColor="#93002F"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/img_profile"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginBottom="22dp"
+                    android:background="@drawable/circle_border2"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_profile_placeholder" />
+
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edit_text_border"
+                    android:enabled="false"
+                    android:paddingStart="8dp"
+                    android:textColor="@color/vinous"
+                    android:textColorHint="@color/vinous" />
+
+                <EditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edit_text_border"
+                    android:enabled="false"
+                    android:paddingStart="8dp"
+                    android:textColor="@color/vinous"
+                    android:textColorHint="@color/vinous" />
+
+                <EditText
+                    android:id="@+id/et_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/edit_text_border"
+                    android:enabled="false"
+                    android:paddingStart="8dp"
+                    android:textColor="@color/vinous"
+                    android:textColorHint="@color/vinous"
+                    android:hint="Адрес"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="9dp"
+                    android:text="Изменить данные"
+                    android:textColor="#A0003D"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edit_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edit_text_border"
+                    android:hint="Имя"
+                    android:paddingStart="8dp"
+                    android:textColor="@color/vinous"
+                    android:textColorHint="@color/vinous" />
+
+                <EditText
+                    android:id="@+id/edit_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edit_text_border"
+                    android:hint="Номер телефона"
+                    android:paddingStart="8dp"
+                    android:inputType="phone"
+                    android:textColor="@color/vinous"
+                    android:textColorHint="@color/vinous" />
+
+                <EditText
+                    android:id="@+id/edit_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edit_text_border"
+                    android:hint="Пароль"
+                    android:inputType="textPassword"
+                    android:paddingStart="8dp"
+                    android:textColor="@color/vinous"
+                    android:textColorHint="@color/vinous" />
+
+                <EditText
+                    android:id="@+id/edit_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edit_text_border"
+                    android:hint="Адрес"
+                    android:paddingStart="8dp"
+                    android:textColor="@color/vinous"
+                    android:textColorHint="@color/vinous" />
+
+                <Button
+                    android:id="@+id/btn_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/button_rounded2"
+                    android:text="Изменить"
+                    android:textColor="#FFFFFF"
+                    app:backgroundTint="@color/vinous" />
+            </LinearLayout>
+        </ScrollView>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationProfile"
+            style="@style/NoAnimationBottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="#FFF9FC"
+            app:itemIconTint="@color/bottom_nav_item_color"
+            app:itemTextColor="@color/bottom_nav_item_color"
+            app:labelVisibilityMode="unlabeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:menu="@menu/bottom_nav_menu" />
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

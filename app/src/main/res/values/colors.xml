@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="vinous">#990F3D</color>
+    <color name="dark_pink">#CC2944</color>
+    <color name="fuchsia">#D97787</color>
+    <color name="pink">#E6ACB6</color>
+    <color name="light_pink">#E6D6CF</color>
+    <color name="back_pink">#FFF2FA</color>
+    <color name="none">#00FFFFFF</color>
+
+    <style name="NoAnimationBottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemHorizontalTranslationEnabled">false</item>
+        <item name="elevation">0dp</item>
+    </style>
+</resources>
