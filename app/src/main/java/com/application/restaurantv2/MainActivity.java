@@ -70,14 +70,12 @@ public class MainActivity extends AppCompatActivity implements OnCategoryClickLi
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        //imageViewBanner = findViewById(R.id.imageView5);
-
-// Слайд-шоу баннеров
+    // Слайд-шоу баннеров
         bannerViewPager = findViewById(R.id.bannerViewPager);
         BannerAdapter bannerAdapter = new BannerAdapter(bannerImages);
         bannerViewPager.setAdapter(bannerAdapter);
 
-// Автопрокрутка
+    // Автопрокрутка
         Runnable bannerRunnable = new Runnable() {
             @Override
             public void run() {
@@ -87,27 +85,6 @@ public class MainActivity extends AppCompatActivity implements OnCategoryClickLi
             }
         };
         bannerHandler.postDelayed(bannerRunnable, 2000);
-
-        //HorizontalScrollView scrollView = findViewById(R.id.horizontalImageScrollView);
-        //View leftGradient = findViewById(R.id.left_gradient);
-        //View rightGradient = findViewById(R.id.right_gradient);
-        //ViewTreeObserver.OnScrollChangedListener listener = new ViewTreeObserver.OnScrollChangedListener() {
-        //    @Override
-        //    public void onScrollChanged() {
-        //        updateGradientsVisibility(scrollView, leftGradient, rightGradient);
-        //    }
-        //};
-        //scrollView.getViewTreeObserver().addOnScrollChangedListener(listener);
-
-            // Вызови обновление сразу после layout завершен:
-        //scrollView.post(new Runnable() {
-        //    @Override
-        //    public void run() {
-        //        updateGradientsVisibility(scrollView, leftGradient, rightGradient);
-        //    }
-        //});
-
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
