@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
@@ -42,20 +43,54 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+import androidx.appcompat.widget.SearchView;
+
 public class ProductActivity extends AppCompatActivity implements OnProductClickListener {
     String[] countries = {"Уфа", "Новый Уренгой", "Санкт-Петербург", "Сеул"};
     int activeCategoryId;
+
+
+    private List<ProductListItem> originalItems = new ArrayList<>();
+    private CatalogAdapter adapter;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_product);
+
+
+        // Поиск
+        SearchView searchView = findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filterCatalog(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText.isEmpty()) {
+                    // При очистке поиска показываем все элементы с категориями
+                    adapter.updateItems(originalItems);
+                } else {
+                    filterCatalog(newText);
+                }
+                return true;
+            }
+        });
+
+
+
 
         activeCategoryId = getIntent().getIntExtra("category_id", -1);
 
@@ -69,9 +104,34 @@ public class ProductActivity extends AppCompatActivity implements OnProductClick
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+
+        //сохранение выбранного города
+        SharedPreferences cityPrefs = getSharedPreferences("city_pref", MODE_PRIVATE);
+        String selectedCity = cityPrefs.getString("selected_city", "Уфа");
+        int selectedIndex = Arrays.asList(countries).indexOf(selectedCity);
+        if (selectedIndex >= 0) {
+            spinner.setSelection(selectedIndex);
+        }
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String city = countries[position];
+                SharedPreferences.Editor editor = cityPrefs.edit();
+                editor.putString("selected_city", city);
+                editor.apply();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+
+
         SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
         String bonuses = prefs.getString("bonuses", null);
-        String address = prefs.getString("address", null);
+//        String address = prefs.getString("address", null);
         if (bonuses != null) {
             Button btnPoints = findViewById(R.id.button2);
             btnPoints.setText(bonuses);
@@ -79,13 +139,13 @@ public class ProductActivity extends AppCompatActivity implements OnProductClick
             Button btnPoints = findViewById(R.id.button2);
             btnPoints.setText("0");
         }
-        if (address != null && !address.equals("null")) {
-            TextView textView3 = findViewById(R.id.textView3);
-            textView3.setText(address);
-        } else {
-            TextView textView3 = findViewById(R.id.textView3);
-            textView3.setText("ул. Колотушкина 99/3");
-        }
+//        if (address != null && !address.equals("null")) {
+//            TextView textView3 = findViewById(R.id.textView3);
+//            textView3.setText(address);
+//        } else {
+//            TextView textView3 = findViewById(R.id.textView3);
+//            textView3.setText("ул. Колотушкина 99/3");
+//        }
 
         HorizontalScrollView scrollView = findViewById(R.id.horizontalScrollView);
         View leftGradient = findViewById(R.id.left_gradient);
@@ -186,10 +246,22 @@ public class ProductActivity extends AppCompatActivity implements OnProductClick
             }
         }
 
+        //RecyclerView recyclerView = findViewById(R.id.productRecyclerView);
+        //CatalogAdapter adapter = new CatalogAdapter(this, items, this);
+        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //recyclerView.setAdapter(adapter);
+
+
         RecyclerView recyclerView = findViewById(R.id.productRecyclerView);
-        CatalogAdapter adapter = new CatalogAdapter(this, items, this);
+
+        originalItems.clear();
+        originalItems.addAll(items);
+
+        adapter = new CatalogAdapter(this, items, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+
+
 
         // Настройка TabLayout
         TabLayout tabLayout = findViewById(R.id.tab_layout);
@@ -291,7 +363,7 @@ public class ProductActivity extends AppCompatActivity implements OnProductClick
                         .circleCrop()
                         .into(productImage);
                 titleView.setText(product.getName());
-                descView.setText("заглушка, ибо описания нет");
+                descView.setText("заглушка");
                 String[] nutrition = {product.getCalorie(), product.getSquirrels(), product.getFats(), product.getCarbohydrates()};
                 addNutritionRows(nutritionTable, nutrition);
 
@@ -427,4 +499,24 @@ public class ProductActivity extends AppCompatActivity implements OnProductClick
 
         Volley.newRequestQueue(this).add(request);
     }
+
+
+
+    private void filterCatalog(String query) {
+        List<ProductListItem> filtered = new ArrayList<>();
+
+        for (ProductListItem item : originalItems) {
+            if (item.getType() == ProductListItem.TYPE_PRODUCT) {
+                ProductSmall product = (ProductSmall) item;
+                if (product.getName().toLowerCase().contains(query.toLowerCase())) {
+                    filtered.add(product);
+                }
+            }
+            // категории не добавляются при фильтрации
+        }
+
+        adapter.updateItems(filtered);
+    }
+
+
 }

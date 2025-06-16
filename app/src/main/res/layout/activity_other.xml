@@ -5,7 +5,7 @@
     android:id="@+id/other"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="#FFF9FC"
     tools:context=".OrderFinishActivity">
 
     <!-- Заголовок -->
@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="50dp"
         android:text="Прочее"
         android:textColor="#8B0032"
         android:textSize="22sp"
@@ -32,7 +32,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical"
-            android:translationY="-230dp">
+            android:translationY="0dp">
+
+            <Button
+                android:id="@+id/btnOrders"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#8B0032"
+                android:text="Заказы"
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/btnContact"
@@ -41,14 +49,6 @@
                 android:backgroundTint="#8B0032"
                 android:textColor="@color/white"
                 android:text="Контакты" />
-
-            <Button
-                android:id="@+id/btnOrders"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#8B0032"
-                android:textColor="@color/white"
-                android:text="Просмотреть заказы" />
         </LinearLayout>
 
     </FrameLayout>

@@ -104,4 +104,10 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         }
     }
+
+    public void updateItems(List<ProductListItem> newItems) {
+        this.itemList = newItems;
+        notifyDataSetChanged();
+    }
+
 }

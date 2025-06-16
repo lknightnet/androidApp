@@ -22,13 +22,12 @@
 
         <TextView
             android:id="@+id/fixedItemName"
-            android:layout_width="0dp"
+            android:layout_width="263dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Приборы"
             android:textColor="#8B0032"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -51,6 +50,7 @@
                 android:id="@+id/fixedItemQuantity"
                 android:layout_width="32dp"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
                 android:gravity="center"
                 android:textColor="#8B0032"
                 android:textSize="18sp" />

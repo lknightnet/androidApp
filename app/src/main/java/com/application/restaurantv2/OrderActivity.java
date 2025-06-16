@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -37,13 +39,166 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.widget.EditText;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
+
 public class OrderActivity extends AppCompatActivity {
     private int bonuses;
+    private RadioGroup paymentMethods;
+    private String paymentMethod;
+    private int checkedId;
+    private EditText cardNumber;
+    private EditText cardDate;
+    private EditText cardCVV;
+    private EditText inputComment;
+    private Button btnDelivery;
+    private String instrumentationQuantity;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_order);
+
+
+        cardNumber = findViewById(R.id.card_number);
+        cardDate = findViewById(R.id.card_date);
+        cardCVV = findViewById(R.id.card_cvv);
+        inputComment = findViewById(R.id.input_comment);
+        btnDelivery = findViewById(R.id.btn_delivery);
+        instrumentationQuantity = getIntent().getStringExtra("instrumentation_quantity");
+
+
+
+        EditText cardCVV = findViewById(R.id.card_cvv);
+        InputFilter lengthFilter = new InputFilter.LengthFilter(3);
+        InputFilter digitsFilter = new InputFilter() {
+            @Override
+            public CharSequence filter(CharSequence source, int start, int end,
+                                       Spanned dest, int dstart, int dend) {
+                for (int i = start; i < end; i++) {
+                    if (!Character.isDigit(source.charAt(i))) {
+                        return "";
+                    }
+                }
+                return null;
+            }
+        };
+        cardCVV.setFilters(new InputFilter[]{lengthFilter, digitsFilter});
+
+        //
+        EditText cardDate = findViewById(R.id.card_date);
+        cardDate.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+        // Добавляем маску **/**
+        cardDate.addTextChangedListener(new TextWatcher() {
+            private boolean isUpdating = false;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (isUpdating) {
+                    isUpdating = false;
+                    return;
+                }
+
+                String digitsOnly = s.toString().replaceAll("[^\\d]", "");
+
+                if (digitsOnly.length() > 4) {
+                    digitsOnly = digitsOnly.substring(0, 4);
+                }
+
+                String month = "";
+                String year = "";
+
+                if (digitsOnly.length() >= 1) {
+                    month = digitsOnly.substring(0, Math.min(2, digitsOnly.length()));
+
+                    // Проверяем месяц, если длина 2
+                    if (month.length() == 2) {
+                        int monthNum = Integer.parseInt(month);
+                        if (monthNum == 0) {
+                            month = "01";
+                        } else if (monthNum > 12) {
+                            month = "12";
+                        }
+                    }
+                }
+
+                if (digitsOnly.length() > 2) {
+                    year = digitsOnly.substring(2);
+                }
+
+                StringBuilder formatted = new StringBuilder();
+                formatted.append(month);
+                if (digitsOnly.length() > 2) {
+                    formatted.append('/');
+                    formatted.append(year);
+                }
+
+                isUpdating = true;
+                cardDate.setText(formatted.toString());
+                cardDate.setSelection(formatted.length());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
+
+
+        EditText cardNumber = findViewById(R.id.card_number);
+
+        cardNumber.addTextChangedListener(new TextWatcher() {
+            private boolean isFormatting;
+            private int previousLength;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                previousLength = s.length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (isFormatting) return;
+
+                isFormatting = true;
+
+                // Удаляем все символы, кроме цифр
+                String digitsOnly = s.toString().replaceAll("[^\\d]", "");
+
+                // Ограничиваем ввод до 16 символов
+                if (digitsOnly.length() > 16) {
+                    digitsOnly = digitsOnly.substring(0, 16);
+                }
+
+                // Добавляем пробелы после каждой четвёрки
+                StringBuilder formatted = new StringBuilder();
+                for (int i = 0; i < digitsOnly.length(); i++) {
+                    if (i > 0 && i % 4 == 0) {
+                        formatted.append(" ");
+                    }
+                    formatted.append(digitsOnly.charAt(i));
+                }
+
+                // Обновляем поле
+                cardNumber.removeTextChangedListener(this);
+                cardNumber.setText(formatted.toString());
+                cardNumber.setSelection(formatted.length());
+                cardNumber.addTextChangedListener(this);
+
+                isFormatting = false;
+            }
+        });
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.order), (v, insets) -> {
             Insets navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
@@ -75,9 +230,9 @@ public class OrderActivity extends AppCompatActivity {
         btnBack();
 
         Button btn_pay = findViewById(R.id.btn_pay);
-        RadioGroup paymentMethods = findViewById(R.id.payment_methods);
-        int checkedId = paymentMethods.getCheckedRadioButtonId();
-        String paymentMethod;
+        paymentMethods = findViewById(R.id.payment_methods); // если это поле класса
+        checkedId = paymentMethods.getCheckedRadioButtonId(); // если это поле класса
+        paymentMethod = ""; // просто присваивание
         if (checkedId == R.id.radio_card) {
             paymentMethod = "card";
         } else if (checkedId == R.id.radio_cash) {
@@ -86,8 +241,55 @@ public class OrderActivity extends AppCompatActivity {
             paymentMethod = "";
         }
         EditText comment = findViewById(R.id.input_comment);
+
         btn_pay.setOnClickListener(v -> {
-            sendPostRequest(this, instrumentationQuantity, btnDelivery.isSelected(), paymentMethod, comment.getText().toString().trim());
+            checkedId = paymentMethods.getCheckedRadioButtonId(); // уже объявлены выше
+
+            if (checkedId == R.id.radio_card) {
+                String cardNumberStr = cardNumber.getText().toString().replaceAll("\\s", "");
+                String cardDateStr = cardDate.getText().toString();
+                String cardCVVStr = cardCVV.getText().toString();
+
+                if (cardNumberStr.length() != 16) {
+                    Drawable errorIcon = ContextCompat.getDrawable(this, R.drawable.ic_error_custom);
+                    if (errorIcon != null) {
+                        errorIcon.setBounds(0, 0, errorIcon.getIntrinsicWidth(), errorIcon.getIntrinsicHeight());
+                    }
+                    cardNumber.setError("Введите номер карты", errorIcon);
+                    cardNumber.requestFocus();
+                    return;
+                }
+                if (!cardDateStr.matches("(0[1-9]|1[0-2])/\\d{2}")) {
+                    Drawable errorIcon = ContextCompat.getDrawable(this, R.drawable.ic_error_custom);
+                    if (errorIcon != null) {
+                        errorIcon.setBounds(0, 0, errorIcon.getIntrinsicWidth(), errorIcon.getIntrinsicHeight());
+                    }
+                    cardDate.setError("Введите дату", errorIcon);
+                    cardDate.requestFocus();
+                    return;
+
+                }
+                if (cardCVVStr.length() != 3) {
+                    Drawable errorIcon = ContextCompat.getDrawable(this, R.drawable.ic_error_custom);
+                    if (errorIcon != null) {
+                        errorIcon.setBounds(0, 0, errorIcon.getIntrinsicWidth(), errorIcon.getIntrinsicHeight());
+                    }
+                    cardCVV.setError("Введите код ", errorIcon);
+                    cardCVV.requestFocus();
+                    return;
+                }
+
+            }
+
+            paymentMethod = ""; // просто переиспользуем переменную
+
+            if (checkedId == R.id.radio_card) {
+                paymentMethod = "card";
+            } else if (checkedId == R.id.radio_cash) {
+                paymentMethod = "cash";
+            }
+
+            sendPostRequest(this, instrumentationQuantity, btnDelivery.isSelected(), paymentMethod, inputComment.getText().toString().trim());
         });
     }
 
@@ -101,7 +303,7 @@ public class OrderActivity extends AppCompatActivity {
             jsonBody.put("instrumentation_quantity", Integer.parseInt(instrumentationQuantity));
             jsonBody.put("is_delivery", isDelivery);
             jsonBody.put("payment_method", paymentMethod);
-            jsonBody.put("city", "Уфа");
+            //jsonBody.put("city", "Уфа");
             jsonBody.put("bonuses", bonuses);
             jsonBody.put("comment", comment);
         } catch (JSONException e) {

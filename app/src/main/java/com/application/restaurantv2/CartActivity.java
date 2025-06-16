@@ -51,6 +51,9 @@ public class CartActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_cart);
 
+
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.cartRoot), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -77,10 +80,34 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
+        //Button btnCheckout = findViewById(R.id.btnCheckout);
+        //btnCheckout.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View v) {
+        //        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+        //        String address = prefs.getString("address", null);
+        //        if (address != null && !address.equals("null")) {
+        //            Intent intent = new Intent(CartActivity.this, OrderActivity.class);
+        //            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        //            intent.putExtra("total_price", totalPriceText.getText());
+        //            intent.putExtra("instrumentation_quantity", String.valueOf(fixedQuantity));
+        //            startActivity(intent);
+        //            finish();
+        //        } else {
+        //            Toast.makeText(CartActivity.this, "Отсутствует адрес", Toast.LENGTH_SHORT).show();
+        //        }
+        //    }
+        //});
+
         Button btnCheckout = findViewById(R.id.btnCheckout);
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (cartItems.isEmpty()) {
+                    Toast.makeText(CartActivity.this, "Корзина пустая", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
                 String address = prefs.getString("address", null);
                 if (address != null && !address.equals("null")) {
@@ -93,8 +120,6 @@ public class CartActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(CartActivity.this, "Отсутствует адрес", Toast.LENGTH_SHORT).show();
                 }
-
-
             }
         });
 

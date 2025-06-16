@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import android.text.Spannable;
+import android.graphics.Color;
+
+
 public class OrderInformationActivity extends AppCompatActivity {
 
     @Override
@@ -50,6 +57,19 @@ public class OrderInformationActivity extends AppCompatActivity {
 
         int orderId = getIntent().getIntExtra("order_id", -1);
         loadOrderInformation(this, orderId);
+
+        Button btnGoToHome = findViewById(R.id.btnGoToMenu);
+        setBtnOnMainActivity(btnGoToHome);
+    }
+
+    public void setBtnOnMainActivity(Button btnGoToHome) {
+        btnGoToHome.setOnClickListener(v -> {
+            Intent intent;
+            intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        });
     }
 
     public void loadOrderInformation(Context context, int id) {
@@ -131,7 +151,23 @@ public class OrderInformationActivity extends AppCompatActivity {
 
         TextView orderNumber = findViewById(R.id.orderNumber);
         Log.e("ORDER_INFO_ID", String.valueOf(order.order_info.id));
-        orderNumber.setText("Заказ #" + order.order_info.id);
+
+        String part1 = "Заказ ";
+        String part2 = "#" + order.order_info.id;
+
+        SpannableStringBuilder ssb = new SpannableStringBuilder();
+        ssb.append(part1);
+        ssb.append(part2);
+
+        // Цвет для "Заказ "
+        ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#A10035")),
+                0, part1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // Цвет для номера заказа "#123456"
+        ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#000000")),
+                part1.length(), part1.length() + part2.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        orderNumber.setText(ssb);
 
         TextView orderStatus = findViewById(R.id.orderStatus);
         orderStatus.setText(order.order_info.status);
@@ -139,14 +175,14 @@ public class OrderInformationActivity extends AppCompatActivity {
         TextView orderCutlery = findViewById(R.id.orderCutlery);
         orderCutlery.setText("Приборы : " + order.order_info.instrumentation_quantity);
 
-        TextView orderCity = findViewById(R.id.orderCity);
-        orderCity.setText("Город : " + order.order_info.city);
+        //TextView orderCity = findViewById(R.id.orderCity);
+        //orderCity.setText("Город : " + order.order_info.city);
 
         TextView orderAddress = findViewById(R.id.orderAddress);
         orderAddress.setText("Адрес : " + order.order_info.address);
 
-//        TextView orderName = findViewById(R.id.orderName);
-//        orderName.setText("Имя : " + order.order_info.name);
+        //TextView orderName = findViewById(R.id.orderName);
+        //orderName.setText("Имя : " + order.order_info.name);
 
         TextView orderPhone = findViewById(R.id.orderPhone);
         orderPhone.setText("Номер телефона : " + order.order_info.user_phone);

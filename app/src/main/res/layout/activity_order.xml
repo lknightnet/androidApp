@@ -5,7 +5,7 @@
     android:id="@+id/order"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@android:color/white"
+    android:background="#FFF9FC"
     android:fillViewport="true">
 
     <androidx.core.widget.NestedScrollView
@@ -25,7 +25,7 @@
             android:orientation="vertical"
             android:paddingStart="24dp"
             android:paddingLeft="24dp"
-            android:paddingTop="48dp"
+            android:paddingTop="55dp"
             android:paddingEnd="24dp"
             android:paddingRight="2dp"
             android:paddingBottom="24dp">
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:text="Оформление заказа"
                 android:textColor="#93002F"
-                android:textSize="24sp" />
+                android:textSize="20sp" />
 
             <!-- Адрес -->
             <TextView
@@ -86,14 +86,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Имя"
-                android:textColor="#990033" />
+                android:textColor="#FF4081" />
 
             <TextView
                 android:id="@+id/text_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="3dp"
-                android:textColor="#000000"
+                android:layout_marginBottom="5dp"
+                android:textColor="#990033"
                 android:textSize="18sp" />
 
             <!-- Телефон -->
@@ -107,7 +107,7 @@
                 android:id="@+id/text_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
+                android:layout_marginBottom="5dp"
                 android:textColor="#990033"
                 android:textSize="18sp" />
 
@@ -116,12 +116,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Бонусы (макс. 100)"
-
                 android:textColor="#FF4081" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/border_button"
                 android:gravity="center_vertical"
@@ -136,7 +135,7 @@
                     android:hint="0"
                     android:inputType="number"
                     android:maxLength="3"
-                    android:padding="12dp"
+                    android:padding="8dp"
                     android:textColor="@color/vinous"
                     android:textColorHint="@color/vinous" />
 
@@ -161,10 +160,10 @@
                 android:id="@+id/input_comment"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/border_button"
                 android:gravity="top"
-                android:padding="12dp"
+                android:padding="10dp"
                 android:textColor="@color/vinous" />
 
             <!-- Способ оплаты -->
@@ -190,9 +189,10 @@
                     android:button="@null"
                     android:checked="true"
                     android:gravity="center_vertical"
-                    android:padding="12dp"
+                    android:padding="10dp"
                     android:text="Банковская карта"
-                    android:textColor="@color/radio_button_text_color" />
+                    android:textColor="@color/radio_button_text_color"
+                    android:textSize="15dp"/>
 
                 <RadioButton
                     android:id="@+id/radio_cash"
@@ -202,12 +202,14 @@
                     android:background="@drawable/radio_button_selected"
                     android:button="@null"
                     android:gravity="center_vertical"
-                    android:padding="12dp"
+                    android:padding="10dp"
                     android:text="Наличные"
-                    android:textColor="@color/radio_button_text_color" />
+                    android:textColor="@color/radio_button_text_color"
+                    android:textSize="15dp"/>
             </RadioGroup>
 
             <!-- Данные карты -->
+
             <EditText
                 android:id="@+id/card_number"
                 android:layout_width="match_parent"
@@ -215,10 +217,10 @@
                 android:background="@drawable/border_button"
                 android:hint="Номер карты"
                 android:inputType="number"
-                android:padding="12dp"
+                android:padding="10dp"
                 android:textColor="@color/vinous"
-                android:textColorHint="@color/vinous"
-                android:textSize="14dp" />
+                android:textColorHint="#F16C97"
+                android:textSize="15dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -235,10 +237,10 @@
                     android:background="@drawable/border_button"
                     android:hint="Дата"
                     android:inputType="text"
-                    android:padding="12dp"
+                    android:padding="10dp"
                     android:textColor="@color/vinous"
-                    android:textColorHint="@color/vinous"
-                    android:textSize="14dp" />
+                    android:textColorHint="#F16C97"
+                    android:textSize="15dp" />
 
                 <EditText
                     android:id="@+id/card_cvv"
@@ -249,10 +251,10 @@
                     android:background="@drawable/border_button"
                     android:hint="Код"
                     android:inputType="numberPassword"
-                    android:padding="12dp"
+                    android:padding="10dp"
                     android:textColor="@color/vinous"
-                    android:textColorHint="@color/vinous"
-                    android:textSize="14dp" />
+                    android:textColorHint="#F16C97"
+                    android:textSize="15dp" />
             </LinearLayout>
 
             <!-- Кнопки -->
@@ -267,7 +269,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:orientation="horizontal"
-                    android:paddingBottom="4dp">
+                    android:paddingBottom="5dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -279,14 +281,14 @@
                             android:layout_height="wrap_content"
                             android:text="Итого"
                             android:textColor="#990033"
-                            android:textSize="14sp" />
+                            android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/total_amount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#990033"
-                            android:textSize="22sp"
+                            android:textSize="20sp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
@@ -302,17 +304,17 @@
                     <Button
                         android:id="@+id/btn_back"
                         android:layout_width="0dp"
-                        android:layout_height="48dp"
+                        android:layout_height="45dp"
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:backgroundTint="#FFB6C1"
+                        android:backgroundTint="#FFBED3"
                         android:text="Назад"
                         android:textColor="#990033" />
 
                     <Button
                         android:id="@+id/btn_pay"
                         android:layout_width="0dp"
-                        android:layout_height="48dp"
+                        android:layout_height="45dp"
                         android:layout_weight="1"
                         android:backgroundTint="#990033"
                         android:text="Оплатить"

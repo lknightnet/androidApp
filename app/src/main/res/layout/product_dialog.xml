@@ -20,7 +20,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:textColor="@color/vinous"/>
@@ -30,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:textColor="@color/vinous"/>
 
     <!-- Nutrition Table -->

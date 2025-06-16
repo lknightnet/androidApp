@@ -5,7 +5,7 @@
     android:id="@+id/orderInformation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="#FFF9FC"
     tools:context=".OrderInformationActivity">
 
     <!-- Заголовок -->
@@ -13,12 +13,12 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Заказы"
+        android:text="Заказ"
         android:textSize="22sp"
         android:textColor="#8B0032"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="50dp"
         android:layout_marginStart="24dp" />
 
     <LinearLayout
@@ -65,7 +65,8 @@
             android:text="Готовится"
             android:textSize="16sp"
             tools:layout_editor_absoluteX="62dp"
-            tools:layout_editor_absoluteY="412dp" />
+            tools:layout_editor_absoluteY="412dp"
+            android:textColor="#000000"/>
 
         <LinearLayout
             android:id="@+id/itemsContainer"
@@ -85,7 +86,7 @@
             tools:layout_editor_absoluteX="271dp"
             tools:layout_editor_absoluteY="104dp" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/orderCity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,7 +94,7 @@
             android:textSize="16sp"
             android:textColor="#A10035"
             tools:layout_editor_absoluteX="286dp"
-            tools:layout_editor_absoluteY="131dp" />
+            tools:layout_editor_absoluteY="131dp" />-->
 
         <TextView
             android:id="@+id/orderAddress"
@@ -110,8 +111,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Имя : Ева"
-            android:textSize="16sp"
             android:textColor="#A10035"
+            android:textSize="16sp"
             tools:layout_editor_absoluteX="271dp"
             tools:layout_editor_absoluteY="271dp" />
 

@@ -78,7 +78,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_marginBottom="10dp">
 
             <TextView
                 android:id="@+id/textView2"
@@ -91,27 +92,104 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:textColor="@color/vinous"/>
+<!--            android:layout_marginTop="5dp"-->
+
         </LinearLayout>
 
         <!-- Promo Banner -->
-        <ImageView
+        <!--<ImageView
             android:id="@+id/imageView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/stocks"/>
+            app:srcCompat="@drawable/stocks"
+            android:layout_marginBottom="10dp"/>-->
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/bannerViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="16dp" />
+
+
+        <!--<FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <HorizontalScrollView
+                android:id="@+id/horizontalImageScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fillViewport="true"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp">
+
+                <LinearLayout
+                    android:id="@+id/imageContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:showDividers="middle"
+                    android:divider="@drawable/divider2">
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="360dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/stocks" />
+
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="360dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="0dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/stocks" />
+
+
+                     Добавь столько ImageView, сколько нужно
+
+                </LinearLayout>
+            </HorizontalScrollView>
+            <View
+                android:id="@+id/left_gradient"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="@drawable/left_gradient"
+                android:visibility="invisible" />
+            <View
+                android:id="@+id/right_gradient"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:background="@drawable/right_gradient"
+                android:visibility="visible" />
+        </FrameLayout>-->
+
 
         <!-- Search -->
-        <androidx.appcompat.widget.SearchView
+        <!--<androidx.appcompat.widget.SearchView
             android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/tab_layout_background" />
+            android:background="@drawable/tab_layout_background" />-->
 
         <!-- Categories Title -->
+
+        <!-- Dynamic Categories -->
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -119,9 +197,8 @@
             android:layout_marginStart="10dp"
             android:text="Категории"
             android:textColor="@color/vinous"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
-        <!-- Dynamic Categories -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/categoryRecyclerView"
             android:layout_width="match_parent"

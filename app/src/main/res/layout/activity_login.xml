@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:id="@+id/login"
-    android:background="@android:color/white">
+    android:background="#FFF9FC">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,41 +35,42 @@
             android:text="@string/title_login"
             android:textColor="#93002F"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="20dp" />
 
         <!-- Поле Логин -->
         <EditText
             android:id="@+id/etLogin"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="40dp"
             android:hint="Номер телефона"
             android:background="@drawable/edittext_border"
-            android:paddingHorizontal="16dp"
+            android:paddingHorizontal="15dp"
             android:textColorHint="#F16C97"
             android:textColor="#000000"
             android:inputType="phone"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="10dp"
+            android:textSize="15dp"/>
 
         <!-- Поле Пароль -->
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="40dp"
             android:hint="Пароль"
             android:background="@drawable/edittext_border"
-            android:paddingHorizontal="16dp"
+            android:paddingHorizontal="15dp"
             android:textColorHint="#F16C97"
             android:textColor="#000000"
             android:inputType="textPassword"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="20dp"
+            android:textSize="15dp"/>
 
         <!-- Кнопка Войти -->
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginBottom="24dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/button_rounded"
             app:backgroundTint="@color/vinous"
             android:text="@string/btn_login"

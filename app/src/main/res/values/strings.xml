@@ -48,7 +48,7 @@
     <string name="add_to_cart">Добавить</string>
     <string name="back">Назад</string>
     <string name="btn_login">Войти</string>
-    <string name="btn_signup">Зарегестрироваться</string>
+    <string name="btn_signup">Зарегистрироваться</string>
     <string name="btn_link_signup">Регистрация</string>
     <string name="btn_link_login">Авторизация</string>
     <string name="title_signup">Регистрация</string>

@@ -7,9 +7,14 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 
 import android.widget.Spinner;
@@ -34,8 +39,17 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+
+
+import android.os.Handler;
+import android.os.Looper;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+
+import androidx.viewpager2.widget.ViewPager2;
 
 
 public class MainActivity extends AppCompatActivity implements OnCategoryClickListener {
@@ -45,11 +59,55 @@ public class MainActivity extends AppCompatActivity implements OnCategoryClickLi
     private List<Category> categoryList;
     private final String[] city = {"Уфа", "Новый Уренгой", "Санкт-Петербург", "Сеул"};
 
+    private ViewPager2 bannerViewPager;
+    private int[] bannerImages = {R.drawable.stocks, R.drawable.stocks2};
+    private Handler bannerHandler = new Handler(Looper.getMainLooper());
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        //imageViewBanner = findViewById(R.id.imageView5);
+
+// Слайд-шоу баннеров
+        bannerViewPager = findViewById(R.id.bannerViewPager);
+        BannerAdapter bannerAdapter = new BannerAdapter(bannerImages);
+        bannerViewPager.setAdapter(bannerAdapter);
+
+// Автопрокрутка
+        Runnable bannerRunnable = new Runnable() {
+            @Override
+            public void run() {
+                int nextItem = (bannerViewPager.getCurrentItem() + 1) % bannerImages.length;
+                bannerViewPager.setCurrentItem(nextItem, true);
+                bannerHandler.postDelayed(this, 2000); // каждые 7 секунды
+            }
+        };
+        bannerHandler.postDelayed(bannerRunnable, 2000);
+
+        //HorizontalScrollView scrollView = findViewById(R.id.horizontalImageScrollView);
+        //View leftGradient = findViewById(R.id.left_gradient);
+        //View rightGradient = findViewById(R.id.right_gradient);
+        //ViewTreeObserver.OnScrollChangedListener listener = new ViewTreeObserver.OnScrollChangedListener() {
+        //    @Override
+        //    public void onScrollChanged() {
+        //        updateGradientsVisibility(scrollView, leftGradient, rightGradient);
+        //    }
+        //};
+        //scrollView.getViewTreeObserver().addOnScrollChangedListener(listener);
+
+            // Вызови обновление сразу после layout завершен:
+        //scrollView.post(new Runnable() {
+        //    @Override
+        //    public void run() {
+        //        updateGradientsVisibility(scrollView, leftGradient, rightGradient);
+        //    }
+        //});
+
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -75,7 +133,6 @@ public class MainActivity extends AppCompatActivity implements OnCategoryClickLi
             textView3.setText("ул. Колотушкина 99/3");
         }
 
-
         Button button = findViewById(R.id.btn_profile);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,13 +150,37 @@ public class MainActivity extends AppCompatActivity implements OnCategoryClickLi
             }
         });
 
-
         // Spinner (выбор города)
         Spinner spinner = findViewById(R.id.spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, city);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+        // Восстановление сохранённого города
+        SharedPreferences cityPrefs = getSharedPreferences("city_pref", MODE_PRIVATE);
+        String savedCity = cityPrefs.getString("selected_city", "Уфа"); // по умолчанию "Уфа"
+        int selectedIndex = Arrays.asList(city).indexOf(savedCity);
+        if (selectedIndex >= 0) {
+            spinner.setSelection(selectedIndex);
+        }
+
+        // Слушатель выбора города
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedCity = city[position];
+
+                // Сохраняем выбранный город
+                SharedPreferences.Editor editor = getSharedPreferences("city_pref", MODE_PRIVATE).edit();
+                editor.putString("selected_city", selectedCity);
+                editor.apply();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // ничего не делаем
+            }
+        });
 
         // RecyclerView
         recyclerView = findViewById(R.id.categoryRecyclerView);
@@ -112,6 +193,14 @@ public class MainActivity extends AppCompatActivity implements OnCategoryClickLi
         // Загрузка категорий из API
         loadCategories();
     }
+
+    //private void updateGradientsVisibility(HorizontalScrollView scrollView, View leftGradient, View rightGradient) {
+    //    boolean canScrollLeft = scrollView.getScrollX() > 0;
+    //    boolean canScrollRight = scrollView.getChildAt(0).getRight() > (scrollView.getScrollX() + scrollView.getWidth());
+
+    //    leftGradient.setVisibility(canScrollLeft ? View.VISIBLE : View.INVISIBLE);
+    //    rightGradient.setVisibility(canScrollRight ? View.VISIBLE : View.INVISIBLE);
+    //}
 
     private void loadCategories() {
         String url = "http://185.192.247.23:8080/api/catalog/categories";
@@ -164,4 +253,15 @@ public class MainActivity extends AppCompatActivity implements OnCategoryClickLi
         intent.putExtra("category_id", category.getId());
         startActivity(intent);
     }
+
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        bannerHandler.removeCallbacksAndMessages(null);
+    }
+
+
+
 }

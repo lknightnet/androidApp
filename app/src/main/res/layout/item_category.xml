@@ -9,16 +9,16 @@
 
     <ImageView
         android:id="@+id/categoryImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
         android:scaleType="centerCrop"
-        android:padding="4dp"/>
+        android:padding="5dp"/>
 
-    <TextView
-        android:id="@+id/categoryName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="6dp"
-        android:textColor="#000"
-        android:textSize="14sp"/>
+<!--    <TextView-->
+<!--        android:id="@+id/categoryName"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="#93002F"-->
+<!--        android:textSize="15sp"-->
+<!--        android:layout_marginTop="5dp"/>-->
 </LinearLayout>

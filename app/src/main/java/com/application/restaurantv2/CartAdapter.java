@@ -7,12 +7,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.application.restaurantv2.R;
 
 import java.util.List;
 
@@ -49,20 +49,37 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(context);
         if (viewType == TYPE_EXTRA_CARD) {
             View view = inflater.inflate(R.layout.item_fixed_card, parent, false);
+            view.setTag(this); // связываем адаптер с view для обратной связи
             return new ExtraCardViewHolder(view);
         } else {
             View view = inflater.inflate(R.layout.item_cart, parent, false);
             return new CartViewHolder(view);
+        }
+
+    }
+
+    private int fixedItemQuantity = 1;
+
+    public int getFixedItemQuantity() {
+        return fixedItemQuantity;
+    }
+
+    public void setFixedItemQuantity(int quantity) {
+        if (quantity >= 1 && quantity <= 10) {
+            fixedItemQuantity = quantity;
+            notifyItemChanged(cartItems.size());
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == TYPE_EXTRA_CARD) {
-            ((ExtraCardViewHolder) holder).bind();
+            ((ExtraCardViewHolder) holder).bind(fixedItemQuantity);
         } else {
             CartItem item = cartItems.get(position);
             CartViewHolder h = (CartViewHolder) holder;
+
+            h.itemName.setSelected(true);
 
             h.itemName.setText(item.getName());
             h.itemWeight.setText(item.getWeight());
@@ -81,6 +98,7 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     ((CartActivity) context).sendRemoveToCartRequest(item.getId());
                 }
             });
+
         }
     }
 
@@ -117,16 +135,20 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             btnMinus = itemView.findViewById(R.id.fixedBtnMinus);
         }
 
-        public void bind() {
-            itemQuantity.setText("1");
+        public void bind(int quantity) {
+            itemQuantity.setText(String.valueOf(quantity));
 
             btnPlus.setOnClickListener(v -> {
                 int qty = Integer.parseInt(itemQuantity.getText().toString());
-                qty++;
-                itemQuantity.setText(String.valueOf(qty));
-
-                if (itemView.getContext() instanceof CartActivity) {
-                    ((CartActivity) itemView.getContext()).updateFixedItemQuantity(qty);
+                if (qty < 10) {
+                    qty++;
+                    itemQuantity.setText(String.valueOf(qty));
+                    if (itemView.getContext() instanceof CartActivity) {
+                        ((CartActivity) itemView.getContext()).updateFixedItemQuantity(qty);
+                    }
+                    ((CartAdapter) itemView.getTag()).setFixedItemQuantity(qty);
+                } else {
+                    Toast.makeText(itemView.getContext(), "Не более 10 приборов", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -135,10 +157,10 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 if (qty > 1) {
                     qty--;
                     itemQuantity.setText(String.valueOf(qty));
-
                     if (itemView.getContext() instanceof CartActivity) {
                         ((CartActivity) itemView.getContext()).updateFixedItemQuantity(qty);
                     }
+                    ((CartAdapter) itemView.getTag()).setFixedItemQuantity(qty);
                 }
             });
         }

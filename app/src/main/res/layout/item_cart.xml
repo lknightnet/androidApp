@@ -30,85 +30,110 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="101dp"
-            android:layout_marginStart="8dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="0dp"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/itemName"
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/vinous"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@id/quantityLayout"
-                app:layout_constraintStart_toEndOf="@id/itemImage"
-                app:layout_constraintTop_toTopOf="@id/itemImage" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/itemWeight"
-                android:layout_width="67dp"
-                android:layout_height="wrap_content"
-                android:textColor="#FF9EB2"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@id/itemName"
-                app:layout_constraintTop_toBottomOf="@id/itemName" />
+                <TextView
+                    android:id="@+id/itemName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/vinous"
+                    android:textSize="18sp" />
+                <!--                <TextView-->
+                <!--                    android:id="@+id/itemName"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:textColor="@color/vinous"-->
+                <!--                    android:textSize="16sp"-->
+                <!--                    android:maxLines="2"-->
+                <!--                    app:layout_constraintEnd_toStartOf="@id/quantityLayout"-->
+                <!--                    app:layout_constraintStart_toEndOf="@id/itemImage"-->
+                <!--                    app:layout_constraintTop_toTopOf="@id/itemImage" />-->
 
-            <TextView
-                android:id="@+id/itemPrice"
-                android:layout_width="68dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="27dp"
-                android:textColor="#C9004D"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/itemName"
-                app:layout_constraintTop_toBottomOf="@id/itemWeight" />
+                <!--                <TextView-->
+                <!--                    android:id="@+id/itemName"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:ellipsize="marquee"-->
+                <!--                    android:focusable="true"-->
+                <!--                    android:focusableInTouchMode="true"-->
+                <!--                    android:marqueeRepeatLimit="marquee_forever"-->
+                <!--                    android:scrollHorizontally="true"-->
+                <!--                    android:singleLine="true"-->
+                <!--                    android:textColor="@color/vinous"-->
+                <!--                    android:textSize="18sp" />-->
+
+
+                <TextView
+                    android:id="@+id/itemWeight"
+                    android:layout_width="67dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FF9EB2"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@id/itemName"
+                    app:layout_constraintTop_toBottomOf="@id/itemName" />
+
+                <TextView
+                    android:id="@+id/itemPrice"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:textColor="#C9004D"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@id/itemName"
+                    app:layout_constraintTop_toBottomOf="@id/itemWeight" />
+
+                <LinearLayout
+                    android:id="@+id/quantityLayout"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <Button
+                        android:id="@+id/btnMinus"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:backgroundTint="#8B0032"
+                        android:includeFontPadding="false"
+                        android:padding="0dp"
+                        android:text="@string/minus"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/itemQuantity"
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="2dp"
+                        android:gravity="center"
+                        android:textColor="#8B0032"
+                        android:textSize="18sp" />
+
+                    <Button
+                        android:id="@+id/btnPlus"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:includeFontPadding="false"
+                        android:padding="0dp"
+                        android:text="@string/plus"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        app:backgroundTint="#8B0032" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/quantityLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <Button
-                android:id="@+id/btnMinus"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:backgroundTint="#8B0032"
-                android:includeFontPadding="false"
-                android:padding="0dp"
-                android:text="@string/minus"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/itemQuantity"
-                android:layout_width="32dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="2dp"
-                android:gravity="center"
-                android:textColor="#8B0032"
-                android:textSize="18sp" />
-
-            <Button
-                android:id="@+id/btnPlus"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:includeFontPadding="false"
-                android:padding="0dp"
-                android:text="@string/plus"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                app:backgroundTint="#8B0032" />
-        </LinearLayout>
-
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

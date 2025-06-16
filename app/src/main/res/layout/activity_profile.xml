@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/bottomNavigationProfile"
-            android:background="#FFFFFF">
+            android:background="#FFF9FC">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -25,20 +26,19 @@
                     android:id="@+id/tv_profile_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginVertical="25dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="50dp"
                     android:layout_marginBottom="20dp"
                     android:text="Профиль"
                     android:textColor="#93002F"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/img_profile"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginHorizontal="15dp"
-                    android:layout_marginBottom="22dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/circle_border2"
                     android:scaleType="centerInside"
                     android:src="@drawable/ic_profile_placeholder" />
@@ -83,8 +83,7 @@
                     android:layout_marginBottom="9dp"
                     android:text="Изменить данные"
                     android:textColor="#A0003D"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp"/>
 
                 <EditText
                     android:id="@+id/edit_name"
@@ -95,9 +94,10 @@
                     android:hint="Имя"
                     android:paddingStart="8dp"
                     android:textColor="@color/vinous"
-                    android:textColorHint="@color/vinous" />
+                    android:textColorHint="#F16C97"
+                    android:textSize="15dp"/>
 
-                <EditText
+                <!--<EditText
                     android:id="@+id/edit_phone"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -107,7 +107,21 @@
                     android:paddingStart="8dp"
                     android:inputType="phone"
                     android:textColor="@color/vinous"
-                    android:textColorHint="@color/vinous" />
+                    android:textColorHint="#F16C97"
+                    android:textSize="15dp"/>-->
+
+                <EditText
+                    android:id="@+id/edit_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edit_text_border"
+                    android:hint="Номер телефона"
+                    android:paddingStart="8dp"
+                    android:inputType="number"
+                    android:textColor="@color/vinous"
+                    android:textColorHint="#F16C97"
+                    android:textSize="15sp"/>
 
                 <EditText
                     android:id="@+id/edit_password"
@@ -119,7 +133,8 @@
                     android:inputType="textPassword"
                     android:paddingStart="8dp"
                     android:textColor="@color/vinous"
-                    android:textColorHint="@color/vinous" />
+                    android:textColorHint="#F16C97"
+                    android:textSize="15dp"/>
 
                 <EditText
                     android:id="@+id/edit_address"
@@ -130,12 +145,14 @@
                     android:hint="Адрес"
                     android:paddingStart="8dp"
                     android:textColor="@color/vinous"
-                    android:textColorHint="@color/vinous" />
+                    android:textColorHint="#F16C97"
+                    android:textSize="15dp"
+                    android:inputType="textVisiblePassword" />
 
                 <Button
                     android:id="@+id/btn_save"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/button_rounded2"
                     android:text="Изменить"
                     android:textColor="#FFFFFF"
