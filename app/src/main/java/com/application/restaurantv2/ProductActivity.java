@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -50,26 +51,42 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import androidx.appcompat.widget.SearchView;
+import android.graphics.PorterDuff;
 
 public class ProductActivity extends AppCompatActivity implements OnProductClickListener {
     String[] countries = {"Уфа", "Новый Уренгой", "Санкт-Петербург", "Сеул"};
     int activeCategoryId;
 
-
     private List<ProductListItem> originalItems = new ArrayList<>();
     private CatalogAdapter adapter;
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_product);
 
-
         // Поиск
         SearchView searchView = findViewById(R.id.search_view);
+
+        // МЦвет текста запроса
+        EditText searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+        if (searchEditText != null) {
+            searchEditText.setTextColor(Color.WHITE);
+            searchEditText.setHintTextColor(Color.LTGRAY);
+        }
+
+        // Цвет кнопки крестика
+        ImageView closeIcon = searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
+        if (closeIcon != null) {
+            closeIcon.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        }
+
+        searchView.setOnClickListener(v -> {
+            searchView.setIconified(false); // раскрываем SearchView при нажатии
+            searchView.requestFocus(); // ставим фокус на поле ввода
+        });
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -89,9 +106,6 @@ public class ProductActivity extends AppCompatActivity implements OnProductClick
             }
         });
 
-
-
-
         activeCategoryId = getIntent().getIntExtra("category_id", -1);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.product), (v, insets) -> {
@@ -103,7 +117,6 @@ public class ProductActivity extends AppCompatActivity implements OnProductClick
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, countries);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-
 
         //сохранение выбранного города
         SharedPreferences cityPrefs = getSharedPreferences("city_pref", MODE_PRIVATE);
@@ -126,8 +139,6 @@ public class ProductActivity extends AppCompatActivity implements OnProductClick
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
-
 
         SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
         String bonuses = prefs.getString("bonuses", null);
@@ -246,12 +257,6 @@ public class ProductActivity extends AppCompatActivity implements OnProductClick
             }
         }
 
-        //RecyclerView recyclerView = findViewById(R.id.productRecyclerView);
-        //CatalogAdapter adapter = new CatalogAdapter(this, items, this);
-        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //recyclerView.setAdapter(adapter);
-
-
         RecyclerView recyclerView = findViewById(R.id.productRecyclerView);
 
         originalItems.clear();
@@ -260,8 +265,6 @@ public class ProductActivity extends AppCompatActivity implements OnProductClick
         adapter = new CatalogAdapter(this, items, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-
-
 
         // Настройка TabLayout
         TabLayout tabLayout = findViewById(R.id.tab_layout);
@@ -500,8 +503,6 @@ public class ProductActivity extends AppCompatActivity implements OnProductClick
         Volley.newRequestQueue(this).add(request);
     }
 
-
-
     private void filterCatalog(String query) {
         List<ProductListItem> filtered = new ArrayList<>();
 
@@ -517,6 +518,4 @@ public class ProductActivity extends AppCompatActivity implements OnProductClick
 
         adapter.updateItems(filtered);
     }
-
-
 }
