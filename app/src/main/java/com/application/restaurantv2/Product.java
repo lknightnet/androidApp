@@ -7,11 +7,8 @@ public class Product {
     private String weight;
     private String calorie;
     private String imageUrl;
-
     private String squirrels;
-
     private String fats;
-
     private String carbohydrates;
 
     public Product(int id, String name, String weight,String calorie, String price, String imageUrl, String squirrels, String fats, String carbohydrates) {

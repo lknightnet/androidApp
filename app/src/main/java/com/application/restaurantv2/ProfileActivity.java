@@ -15,26 +15,21 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
@@ -58,7 +53,6 @@ public class ProfileActivity extends AppCompatActivity {
         edit_password = findViewById(R.id.edit_password);
         edit_address = findViewById(R.id.edit_address);
 
-
         setupPhoneMask(edit_phone);
         setupAddressMask(edit_address);
 
@@ -76,7 +70,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private void setupPhoneMask(EditText editText) {
         editText.addTextChangedListener(new TextWatcher() {
@@ -201,7 +194,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-
     private void setupAddressMask(EditText editText) {
         editText.addTextChangedListener(new TextWatcher() {
             boolean isUpdating = false;
@@ -282,8 +274,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
     protected void onResume() {
         super.onResume();
@@ -458,7 +448,5 @@ public class ProfileActivity extends AppCompatActivity {
             finish();
         }
     }
-
-
 }
 

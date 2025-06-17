@@ -21,12 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Группа по центру -->
-
-    <!-- Кнопка -->
-
-    <!-- Обновлённый BottomNavigationView -->
-
     <LinearLayout
         android:id="@+id/centerGroup"
         android:layout_width="wrap_content"

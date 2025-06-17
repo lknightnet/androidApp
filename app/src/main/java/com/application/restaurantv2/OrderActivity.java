@@ -18,28 +18,22 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
-
-
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.widget.EditText;
@@ -64,15 +58,12 @@ public class OrderActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_order);
 
-
         cardNumber = findViewById(R.id.card_number);
         cardDate = findViewById(R.id.card_date);
         cardCVV = findViewById(R.id.card_cvv);
         inputComment = findViewById(R.id.input_comment);
         btnDelivery = findViewById(R.id.btn_delivery);
         instrumentationQuantity = getIntent().getStringExtra("instrumentation_quantity");
-
-
 
         EditText cardCVV = findViewById(R.id.card_cvv);
         InputFilter lengthFilter = new InputFilter.LengthFilter(3);
@@ -90,7 +81,6 @@ public class OrderActivity extends AppCompatActivity {
         };
         cardCVV.setFilters(new InputFilter[]{lengthFilter, digitsFilter});
 
-        //
         EditText cardDate = findViewById(R.id.card_date);
         cardDate.setInputType(InputType.TYPE_CLASS_NUMBER);
 
@@ -151,7 +141,6 @@ public class OrderActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) { }
         });
 
-
         EditText cardNumber = findViewById(R.id.card_number);
 
         cardNumber.addTextChangedListener(new TextWatcher() {
@@ -199,7 +188,6 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
 
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.order), (v, insets) -> {
             Insets navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
             View bottomNav = findViewById(R.id.bottomNavigationView2);
@@ -240,6 +228,7 @@ public class OrderActivity extends AppCompatActivity {
         } else {
             paymentMethod = "";
         }
+
         EditText comment = findViewById(R.id.input_comment);
 
         btn_pay.setOnClickListener(v -> {
@@ -292,7 +281,6 @@ public class OrderActivity extends AppCompatActivity {
             sendPostRequest(this, instrumentationQuantity, btnDelivery.isSelected(), paymentMethod, inputComment.getText().toString().trim());
         });
     }
-
 
     public void sendPostRequest(Context context, String instrumentationQuantity, boolean isDelivery, String paymentMethod, String comment) {
         String url = "http://185.192.247.23:8080/api/order/create";

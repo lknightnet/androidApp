@@ -8,17 +8,6 @@
     android:background="#FFF9FC"
     tools:context=".ProductActivity">
 
-    <!--    <ScrollView-->
-    <!--        android:id="@+id/scrollView2"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:fillViewport="true"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView2"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        tools:ignore="NotSibling">-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -128,7 +117,6 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-
             <View
                 android:id="@+id/left_gradient"
                 android:layout_width="32dp"
@@ -145,13 +133,6 @@
                 android:background="@drawable/right_gradient" />
         </FrameLayout>
 
-        <!--<androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/tab_layout_background"
-            android:queryHint="Поиск товаров" />-->
-
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
             android:layout_width="match_parent"
@@ -160,8 +141,7 @@
             android:iconifiedByDefault="false"
             android:queryHint="Поиск товаров..."
             android:focusable="true"
-            android:clickable="true"
-            />
+            android:clickable="true" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -180,7 +160,6 @@
                 tools:listitem="@layout/item_product" />
         </LinearLayout>
     </LinearLayout>
-    <!--    </ScrollView>-->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView2"
@@ -202,5 +181,4 @@
         app:layout_constraintTop_toBottomOf="parent"
 
         tools:ignore="MissingConstraints" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

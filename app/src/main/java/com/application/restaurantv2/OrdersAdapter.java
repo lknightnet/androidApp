@@ -6,10 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
 public class OrdersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
@@ -27,14 +25,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return orderSmallList.size();
     }
 
-
     @NonNull
     @Override
     public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_order, parent, false);
         return new OrderViewHolder(view);
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
@@ -61,6 +57,4 @@ public class OrdersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             orderStatus = itemView.findViewById(R.id.orderStatus);
         }
     }
-
-
 }

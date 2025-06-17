@@ -37,8 +37,6 @@
         android:background="#FFF9FC"
         android:paddingHorizontal="16dp" />
 
-
-
     <!-- Нижняя панель с кнопками и итогом -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottomBar"
@@ -129,5 +127,4 @@
         app:layout_constraintTop_toBottomOf="parent"
 
         tools:ignore="MissingConstraints" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,5 @@
 package com.application.restaurantv2;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,27 +37,21 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
-
     public String getImageUrl() {
         return imageUrl;
     }
-
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-
     public int getSort() {
         return sort;
     }
-
     public void setSort(int sort) {
         this.sort = sort;
     }
-
     public List<ProductSmall> getProducts() {
         return products;
     }
-
     public void setProducts(List<ProductSmall> products) {
         this.products = products;
     }

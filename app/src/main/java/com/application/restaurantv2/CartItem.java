@@ -19,13 +19,11 @@ public class CartItem {
     }
 
     // Геттеры и сеттеры
-
     public String getName() { return name; }
     public String getWeight() { return weight; }
     public String getPrice() { return price; }
     public int getQuantity() { return quantity; }
     public String getImageUrl() { return imageUrl; }
-
     public void setQuantity(int quantity) { this.quantity = quantity; }
 
     public int getId() {

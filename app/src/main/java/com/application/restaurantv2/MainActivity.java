@@ -16,11 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
-
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -29,28 +27,21 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-
-
 import android.os.Handler;
 import android.os.Looper;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-
 import androidx.viewpager2.widget.ViewPager2;
-
 
 public class MainActivity extends AppCompatActivity implements OnCategoryClickListener {
 
@@ -58,11 +49,9 @@ public class MainActivity extends AppCompatActivity implements OnCategoryClickLi
     private CategoryMainAdapter categoryAdapter;
     private List<Category> categoryList;
     private final String[] city = {"Уфа", "Новый Уренгой", "Санкт-Петербург", "Сеул"};
-
     private ViewPager2 bannerViewPager;
     private int[] bannerImages = {R.drawable.stocks, R.drawable.stocks2};
     private Handler bannerHandler = new Handler(Looper.getMainLooper());
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements OnCategoryClickLi
         bannerViewPager = findViewById(R.id.bannerViewPager);
         BannerAdapter bannerAdapter = new BannerAdapter(bannerImages);
         bannerViewPager.setAdapter(bannerAdapter);
-
     // Автопрокрутка
         Runnable bannerRunnable = new Runnable() {
             @Override
@@ -171,14 +159,6 @@ public class MainActivity extends AppCompatActivity implements OnCategoryClickLi
         loadCategories();
     }
 
-    //private void updateGradientsVisibility(HorizontalScrollView scrollView, View leftGradient, View rightGradient) {
-    //    boolean canScrollLeft = scrollView.getScrollX() > 0;
-    //    boolean canScrollRight = scrollView.getChildAt(0).getRight() > (scrollView.getScrollX() + scrollView.getWidth());
-
-    //    leftGradient.setVisibility(canScrollLeft ? View.VISIBLE : View.INVISIBLE);
-    //    rightGradient.setVisibility(canScrollRight ? View.VISIBLE : View.INVISIBLE);
-    //}
-
     private void loadCategories() {
         String url = "http://185.192.247.23:8080/api/catalog/categories";
 
@@ -231,14 +211,9 @@ public class MainActivity extends AppCompatActivity implements OnCategoryClickLi
         startActivity(intent);
     }
 
-
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         bannerHandler.removeCallbacksAndMessages(null);
     }
-
-
-
 }

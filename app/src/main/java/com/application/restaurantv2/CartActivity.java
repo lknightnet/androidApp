@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -20,17 +19,14 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -51,9 +47,6 @@ public class CartActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_cart);
 
-
-
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.cartRoot), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -68,7 +61,6 @@ public class CartActivity extends AppCompatActivity {
         adapter = new CartAdapter(this, cartItems);
         recyclerView.setAdapter(adapter);
 
-
         Button btnOpenMenu = findViewById(R.id.btnOpenMenu);
         btnOpenMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,25 +71,6 @@ public class CartActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        //Button btnCheckout = findViewById(R.id.btnCheckout);
-        //btnCheckout.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
-        //        String address = prefs.getString("address", null);
-        //        if (address != null && !address.equals("null")) {
-        //            Intent intent = new Intent(CartActivity.this, OrderActivity.class);
-        //            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        //            intent.putExtra("total_price", totalPriceText.getText());
-        //            intent.putExtra("instrumentation_quantity", String.valueOf(fixedQuantity));
-        //            startActivity(intent);
-        //            finish();
-        //        } else {
-        //            Toast.makeText(CartActivity.this, "Отсутствует адрес", Toast.LENGTH_SHORT).show();
-        //        }
-        //    }
-        //});
 
         Button btnCheckout = findViewById(R.id.btnCheckout);
         btnCheckout.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +102,6 @@ public class CartActivity extends AppCompatActivity {
     public void updateFixedItemQuantity(int newQuantity) {
         fixedQuantity = newQuantity;
     }
-
 
     private void loadCartFromApi() {
         SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
@@ -355,5 +327,4 @@ public class CartActivity extends AppCompatActivity {
             finish();
         }
     }
-
 }

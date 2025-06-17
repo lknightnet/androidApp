@@ -7,7 +7,6 @@
     android:padding="20dp"
     android:background="@drawable/modal">
 
-
     <ImageView
         android:id="@+id/productImageDialog"
         android:layout_width="200dp"
@@ -39,8 +38,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:stretchColumns="1">
-
-        <!-- Rows will be added programmatically -->
     </TableLayout>
 
     <!-- Кнопки -->
@@ -58,8 +55,6 @@
             android:layout_weight="1"
             android:text="@string/add_to_cart"
             android:backgroundTint="@color/vinous"
-            android:textColor="@color/white"
-            />
-
+            android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>

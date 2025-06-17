@@ -12,33 +12,27 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.text.Spannable;
 import android.graphics.Color;
-
 
 public class OrderInformationActivity extends AppCompatActivity {
 
@@ -137,7 +131,6 @@ public class OrderInformationActivity extends AppCompatActivity {
         queue.add(request);
     }
 
-
     public void setInfo(ViewOrderByIDList order) {
         LinearLayout itemsContainer = findViewById(R.id.itemsContainer);
         for (ViewOrderProductList item : order.order_product_list) {
@@ -175,12 +168,11 @@ public class OrderInformationActivity extends AppCompatActivity {
         TextView orderCutlery = findViewById(R.id.orderCutlery);
         orderCutlery.setText("Приборы : " + order.order_info.instrumentation_quantity);
 
-
         //TextView orderCity = findViewById(R.id.orderCity);
         //orderCity.setText("Город : " + order.order_info.city);
+
         TextView orderAddress = findViewById(R.id.orderAddress);
         orderAddress.setText("Адрес : " + order.order_info.address);
-
 
         SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
         String name = prefs.getString("name", null);
@@ -210,7 +202,6 @@ public class OrderInformationActivity extends AppCompatActivity {
 
         TextView orderComment = findViewById(R.id.orderComment);
         orderComment.setText("Комментарий к заказу : " + order.order_info.comment);
-
     }
 
     public void setNewActivity(MenuItem item) {

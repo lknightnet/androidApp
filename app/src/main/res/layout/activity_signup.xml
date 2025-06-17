@@ -99,6 +99,5 @@
             android:text="@string/btn_link_login"
             android:textColor="#93002F"
             android:textSize="16sp" />
-
     </LinearLayout>
 </ScrollView>
