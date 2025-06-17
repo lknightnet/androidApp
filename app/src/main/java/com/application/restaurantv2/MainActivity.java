@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements OnCategoryClickLi
             public void run() {
                 int nextItem = (bannerViewPager.getCurrentItem() + 1) % bannerImages.length;
                 bannerViewPager.setCurrentItem(nextItem, true);
-                bannerHandler.postDelayed(this, 2000); // каждые  секунды
+                bannerHandler.postDelayed(this, 2000); // каждые 2 секунды
             }
         };
         bannerHandler.postDelayed(bannerRunnable, 2000);

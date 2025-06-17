@@ -175,14 +175,17 @@ public class OrderInformationActivity extends AppCompatActivity {
         TextView orderCutlery = findViewById(R.id.orderCutlery);
         orderCutlery.setText("Приборы : " + order.order_info.instrumentation_quantity);
 
+
         //TextView orderCity = findViewById(R.id.orderCity);
         //orderCity.setText("Город : " + order.order_info.city);
-
         TextView orderAddress = findViewById(R.id.orderAddress);
         orderAddress.setText("Адрес : " + order.order_info.address);
 
-        //TextView orderName = findViewById(R.id.orderName);
-        //orderName.setText("Имя : " + order.order_info.name);
+
+        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+        String name = prefs.getString("name", null);
+        TextView orderName = findViewById(R.id.orderName);
+        orderName.setText("Имя : " + name);
 
         TextView orderPhone = findViewById(R.id.orderPhone);
         orderPhone.setText("Номер телефона : " + order.order_info.user_phone);
